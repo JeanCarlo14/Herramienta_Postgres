@@ -6,6 +6,7 @@
 package herramienta_postgres;
 
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,9 +17,9 @@ public class Backup {
     private final  String host = "localhost";
     private final  String puerto = "5432";
     private final  String usuario = "postgres";
-    private final  String contra = "root";
+    private final  String contra = "admin123";
     private final  String base_Datos = "BD_SITUN";
-    private final  String path = "\"C:\\Users\\nacho\\Desktop\\respaldo.backup\"";
+    private final  String path = "\"C:\\Users\\Usuario\\Desktop\\respaldo.backup\"";
     private final  String exe = "C:/Program Files/PostgreSQL/9.5/bin\\pg_dump.exe";
     private Escritura es=new Escritura();
         public void respaldo(){
@@ -42,6 +43,7 @@ public class Backup {
         }
         catch (IOException e) {
             System.out.println(e);
+
         }
    
           
