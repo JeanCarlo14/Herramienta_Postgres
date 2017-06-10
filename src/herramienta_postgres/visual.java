@@ -72,6 +72,7 @@ public class visual extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BACKUP_RESTORE_SCC-SITUN");
+        setResizable(false);
 
         respaldo.setBackground(new java.awt.Color(153, 0, 0));
         respaldo.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
