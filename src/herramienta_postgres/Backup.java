@@ -19,9 +19,21 @@ public class Backup {
     private final  String usuario = "postgres";
     private final  String contra = "admin123";
     private final  String base_Datos = "BD_SITUN";
-    private final  String path = "\"C:\\Users\\Usuario\\Desktop\\respaldo.backup\"";
+    private String path;
     private final  String exe = "C:/Program Files/PostgreSQL/9.5/bin\\pg_dump.exe";
     private Escritura es=new Escritura();
+    
+    public Backup(){
+      this.path = "";
+    }
+    
+     public Backup(String ruta){
+      this.path = ruta;
+    }
+    
+     public void setRuta(String ruta){
+      this.path = ruta;
+    }
         public void respaldo(){
 
         ProcessBuilder pb = new ProcessBuilder(exe, "--verbose", "--format", "custom","--blobs", "-f", path);   
@@ -40,8 +52,10 @@ public class Backup {
            p = pb.start();
            System.out.println("Proceso iniciado...");
            es.escribir(p.getInputStream());
+            JOptionPane.showMessageDialog(null, "Respaldo realizado con exito");
         }
         catch (IOException e) {
+             JOptionPane.showMessageDialog(null, "No se pudo realizar el respaldo");
             System.out.println(e);
 
         }
