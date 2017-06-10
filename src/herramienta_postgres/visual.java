@@ -89,6 +89,7 @@ public class visual extends javax.swing.JFrame {
         });
 
         respaldo1.setBackground(new java.awt.Color(153, 0, 0));
+        respaldo1.setEnabled(false);
         respaldo1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         respaldo1.setForeground(new java.awt.Color(255, 255, 255));
         respaldo1.setLabel("Backup");
@@ -105,6 +106,7 @@ public class visual extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setEnabled(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -189,9 +191,17 @@ public class visual extends javax.swing.JFrame {
 
     private void respaldo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respaldo1ActionPerformed
         // TODO add your handling code here:
+        herramienta.setRuta(jTextField1.getText());
         herramienta.respaldo();
+        limpiarCampoBackup();
+        
     }//GEN-LAST:event_respaldo1ActionPerformed
 
+    private void limpiarCampoBackup(){
+        jTextField1.setText("");
+        respaldo1.setEnabled(false);
+    }
+    
     private void recovery(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recovery
       try {
           // TODO add your handling code here:
@@ -202,9 +212,18 @@ public class visual extends javax.swing.JFrame {
     }//GEN-LAST:event_recovery
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-             Ruta r = new Ruta();
-             r.setLocationRelativeTo(null);
-         r.setVisible(true);        // TODO add your handling code here:
+           javax.swing.JFileChooser jF1= new javax.swing.JFileChooser();
+        String ruta = "";
+        try{
+            if(jF1.showSaveDialog(null)==jF1.APPROVE_OPTION){
+            ruta = jF1.getSelectedFile().getAbsolutePath();
+                jTextField1.setText(ruta+".backup");
+                respaldo1.setEnabled(true);
+            }
+    }catch (Exception ex){
+        ex.printStackTrace();
+     }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void respaldoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_respaldoPropertyChange
