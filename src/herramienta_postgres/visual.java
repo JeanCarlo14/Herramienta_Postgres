@@ -234,6 +234,7 @@ public class visual extends javax.swing.JFrame {
            javax.swing.JFileChooser jF1= new javax.swing.JFileChooser();
         String ruta = "";
         try{
+            
             if(jF1.showSaveDialog(null)==jF1.APPROVE_OPTION){
             ruta = jF1.getSelectedFile().getAbsolutePath();
                 jTextField1.setText(ruta+".backup");
@@ -260,7 +261,8 @@ public class visual extends javax.swing.JFrame {
        jF2.setFileFilter(filter);
         String ruta = "";
         try{
-            if(jF2.showSaveDialog(null)==jF2.APPROVE_OPTION){
+            int abrir = jF2.showDialog(null, "Abrir");
+            if(abrir==jF2.APPROVE_OPTION){
                 ruta = jF2.getSelectedFile().getAbsolutePath();
                 jTextField2.setText(ruta);
                 respaldo.setEnabled(true);
