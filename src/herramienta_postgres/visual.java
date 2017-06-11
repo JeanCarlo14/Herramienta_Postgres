@@ -16,9 +16,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -75,6 +77,7 @@ public class visual extends javax.swing.JFrame {
         setResizable(false);
 
         respaldo.setBackground(new java.awt.Color(153, 0, 0));
+        respaldo.setEnabled(false);
         respaldo.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         respaldo.setForeground(new java.awt.Color(255, 255, 255));
         respaldo.setLabel("Recovery");
@@ -120,6 +123,8 @@ public class visual extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jTextField2.setEnabled(false);
 
         jLabel1.setText("Ruta Destino Backup");
         jLabel1.setToolTipText("");
@@ -203,13 +208,26 @@ public class visual extends javax.swing.JFrame {
         respaldo1.setEnabled(false);
     }
     
+                                              
+
+    private void limpiarCampoRecover(){
+        jTextField2.setText("");
+        respaldo.setEnabled(false);
+    }
+  
+    
     private void recovery(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recovery
+       recover.setRuta(jTextField2.getText());
+       conexion miconexion=new conexion();
+       miconexion.conectar();
       try {
-          // TODO add your handling code here:
           recover.pgRestore();
+          JOptionPane.showMessageDialog(null, "Restauracion realizada con exito");
+      
       } catch (IOException ex) {
           Logger.getLogger(visual.class.getName()).log(Level.SEVERE, null, ex);
       }
+        limpiarCampoRecover();
     }//GEN-LAST:event_recovery
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -237,9 +255,20 @@ public class visual extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Ruta r = new Ruta();
-             r.setLocationRelativeTo(null);
-         r.setVisible(true); 
+       JFileChooser jF2= new JFileChooser();
+       FileNameExtensionFilter filter = new FileNameExtensionFilter("BACKUP", "backup");
+       jF2.setFileFilter(filter);
+        String ruta = "";
+        try{
+            if(jF2.showSaveDialog(null)==jF2.APPROVE_OPTION){
+                ruta = jF2.getSelectedFile().getAbsolutePath();
+                jTextField2.setText(ruta);
+                respaldo.setEnabled(true);
+                
+            }
+    }catch (Exception ex){
+        ex.printStackTrace();
+     } 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

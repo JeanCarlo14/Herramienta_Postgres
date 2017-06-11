@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,11 +24,21 @@ public class Recovery {
     private final  String usuario = "postgres";
     private final  String contra = "root";
     private final  String base_Datos = "BD_SITUN";
-    private final  String path = "C:\\Users\\nacho\\Desktop\\respaldo.backup";
+    private   String path;
     private final  String exe = "C:/Program Files/PostgreSQL/9.5/bin/pg_restore.exe";
     private Escritura es=new Escritura();
     
+      public Recovery(){
+      this.path = "";
+    }
     
+     public Recovery(String ruta){
+      this.path = ruta;
+    }
+    
+     public void setRuta(String ruta){
+      this.path = ruta;
+    }
     
     
     public void pgRestore() throws IOException {
@@ -50,16 +61,10 @@ pb.environment().put("PGPASSWORD", "root");
 pb.redirectErrorStream(true);
       try {
           p = pb.start();
-      } catch (IOException ex) {
+          } catch (IOException ex) {
           Logger.getLogger(Recovery.class.getName()).log(Level.SEVERE, null, ex);
       }
-InputStream is = p.getInputStream();
-InputStreamReader isr = new InputStreamReader(is);
-BufferedReader br = new BufferedReader(isr);
-String ll;
-while ((ll = br.readLine()) != null) {
- System.out.println(ll);
-}  
+
  }
     
 }
