@@ -17,7 +17,7 @@ public class Backup {
     private final  String host = "localhost";
     private final  String puerto = "5432";
     private final  String usuario = "postgres";
-    private final  String contra = "admin123";
+    private final  String contra = "root";
     private final  String base_Datos = "BD_SITUN";
     private String path;
     private final  String exe = "C:/Program Files/PostgreSQL/9.5/bin\\pg_dump.exe";
